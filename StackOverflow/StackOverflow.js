@@ -1,9 +1,22 @@
 Questions = new Meteor.Collection("questions");
+Answers = new Meteor.Collection("answers");
+// for each answer add a parent prop that is the id of question
+// => answer = {
+//  _id
+//  parent
+//  content
+//  date
+//  voteValue
+// }
+//
+// To find all answers for a given question:
+// Answers.find({ parent: someQuestion._id })
+
 
 if (Meteor.isClient) {
 
   Template.hello.username = function() {
-  	return Session.get("name");
+    return Session.get("name");
   };
 
   Template.wall.questions = function() {
@@ -24,8 +37,9 @@ if (Meteor.isClient) {
       Questions.update(this._id, {$inc: {score: 1}});
     },
 
-    'click input.replyBtn': function(){
-      Questions.update(this._id, {});
+    'click input.replyBtn': function(e){
+      var reply = $(e.target.parentElement).find('.replyText').val();
+      Questions.update(this._id, {$push: {replies: reply}});
     }
 
   });
@@ -37,6 +51,7 @@ if (Meteor.isClient) {
   });
 
 }
+
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
