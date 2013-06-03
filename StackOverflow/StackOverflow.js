@@ -2,6 +2,10 @@ Questions = new Meteor.Collection("questions");
 
 if (Meteor.isClient) {
 
+  Template.hello.username = function() {
+  	return Session.get("name");
+  };
+
   Template.wall.questions = function() {
     return Questions.find();
   };
@@ -9,7 +13,7 @@ if (Meteor.isClient) {
   Template.wall.events({
     'click input.add': function(){
       var new_question = document.getElementById("new_question").value;
-      Questions.insert({asker: Session.get("name"), content: new_question, score: 0});
+      Questions.insert({asker: Session.get("name"), content: new_question, score: 0, replies:[]});
     },
 
     'click input.delete': function(){
@@ -18,6 +22,10 @@ if (Meteor.isClient) {
 
     'click input.vote_up': function(){
       Questions.update(this._id, {$inc: {score: 1}});
+    },
+
+    'click input.replyBtn': function(){
+      Questions.update(this._id, {});
     }
 
   });

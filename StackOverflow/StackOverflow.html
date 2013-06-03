@@ -14,6 +14,7 @@
     <input id="user_name" type="text">
     <input class="submit_name" type="submit">
   </div>
+  <span class="current_user">Underflowing as: {{username}}</span>
 </template>
 
 <template name="wall">
@@ -39,4 +40,25 @@
     <span class="asker">  - asked by {{asker}} </span>
     <input type="button" value="X" class="delete"/>
   </div>
+  <div class="reply">
+    <input class="replyText" type="text"/>
+    <input class="replyBtn" type="submit" value="answer"/>
+  </div>
 </template>
+
+
+
+
+
+<!-- look up meteor router -->
+
+<!-- <template>
+  {{#if selected_question}}
+  ....
+  {{#else}}
+    {{#if selected_user}}
+      show user
+    {{/if}}
+  {{/if}}
+</template>
+ -->
