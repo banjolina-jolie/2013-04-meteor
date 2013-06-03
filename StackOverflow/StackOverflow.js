@@ -9,7 +9,7 @@ if (Meteor.isClient) {
   Template.wall.events({
     'click input.add': function(){
       var new_question = document.getElementById("new_question").value;
-      Questions.insert({content: new_question, score: 0});
+      Questions.insert({asker: Session.get("name"), content: new_question, score: 0});
     },
 
     'click input.delete': function(){
