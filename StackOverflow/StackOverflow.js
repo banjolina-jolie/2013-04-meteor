@@ -39,7 +39,7 @@ if (Meteor.isClient) {
 
     'click input.replyBtn': function(e){
       var reply = $(e.target.parentElement).find('.replyText').val();
-      Questions.update(this._id, {$push: {replies: reply}});
+      Questions.update(this._id, {$push: {replies: {answer_score: 0, stuff: reply, answerer: Session.get("name")}}});
     }
 
   });

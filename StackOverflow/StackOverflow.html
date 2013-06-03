@@ -41,6 +41,11 @@
     <input type="button" value="X" class="delete"/>
   </div>
   <div class="reply" data-question-id="{{_id}}">
+  	<ul class="replies">
+      {{#each replies}}
+        <li>{{this.stuff}} - answered by {{this.answerer}}</li>
+      {{/each}}
+    </ul>
     <input class="replyText" type="text"/>
     <input class="replyBtn" type="submit" value="answer"/>
   </div>
