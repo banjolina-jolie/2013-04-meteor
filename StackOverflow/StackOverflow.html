@@ -1,0 +1,41 @@
+<head>
+  <title>StackOverflow</title>
+</head>
+
+<body>
+  {{> hello}}
+  {{> wall}}
+</body>
+
+<template name="hello">
+  <h1>Stack Underflow</h1>
+  <div>State your name soldier!</div>
+  <div>
+    <input id="user_name" type="text">
+    <input class="submit_name" type="submit">
+  </div>
+</template>
+
+<template name="wall">
+  <div>
+    <h2>Questions</h2>
+    {{> new_question}}
+  </div>
+  {{#each questions}}
+    {{> question}}
+  {{/each}}
+</template>
+
+<template name="new_question">
+  <input id="new_question" type="text"/>
+  <input type="submit" class="add" value="Ask Question"/>
+</template>
+
+<template name="question">
+  <div>
+    <input type="button" value="vote up" class="vote_up"/>
+    <span class="score"> | {{score}} | </span>
+    <span class="question">{{content}}</span>
+    <!-- <input type="button" value="X" class="delete"/> -->
+  </div>
+</template>
