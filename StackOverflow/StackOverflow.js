@@ -28,7 +28,7 @@ if (Meteor.isClient) {
       var new_question = document.getElementById("new_question").value;
       if(Session.get("name")){
         if(new_question){
-          Questions.insert({asker: Session.get("name"), content: new_question, score: 0, replies:[]});
+          Questions.insert({asker: Session.get("name"), content: new_question, score: 0, replies:[], voters:[]});
         }
       } else {
         alert("You gotta state your name silly!");
@@ -41,6 +41,8 @@ if (Meteor.isClient) {
 
     'click input.vote_up': function(){
       Questions.update(this._id, {$inc: {score: 1}});
+      Questions.update(this._id, {$push: {voters: Session.get("name")}});
+      console.log(Questions.find(this._id));
     },
 
     'click input.replyBtn': function(e){
