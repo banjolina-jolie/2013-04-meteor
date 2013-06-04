@@ -26,7 +26,13 @@ if (Meteor.isClient) {
   Template.wall.events({
     'click input.add': function(){
       var new_question = document.getElementById("new_question").value;
-      Questions.insert({asker: Session.get("name"), content: new_question, score: 0, replies:[]});
+      if(Session.get("name")){
+        if(new_question){
+          Questions.insert({asker: Session.get("name"), content: new_question, score: 0, replies:[]});
+        }
+      } else {
+        alert("You gotta state your name silly!");
+      }
     },
 
     'click input.delete': function(){
@@ -39,7 +45,14 @@ if (Meteor.isClient) {
 
     'click input.replyBtn': function(e){
       var reply = $(e.target.parentElement).find('.replyText').val();
-      Questions.update(this._id, {$push: {replies: {answer_score: 0, stuff: reply, answerer: Session.get("name")}}});
+      if(Session.get("name")){
+        if(reply){
+          Questions.update(this._id, {$push: {replies: {answer_score: 0, stuff: reply, answerer: Session.get("name")}}});
+        }
+      } else{
+        alert("You gotta state your name silly!");
+      }
+
     }
 
   });
